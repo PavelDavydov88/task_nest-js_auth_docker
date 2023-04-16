@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  main:
+    container_name: mainUser
+    build:
+      context: .
+    env_file:
+      - .docker.env
+    ports:
+      - 5002:5002
+    command: npm run start:docker
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgresUser
+    image: postgres:14
+    environment:
+      POSTGRES_DB: "dbKinopoiskUser"
+      POSTGRES_USER: "pguser"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - 5433:5432
