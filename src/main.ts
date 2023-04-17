@@ -3,7 +3,7 @@ import { AppModule } from "./app.module";
 import { Transport } from "@nestjs/microservices";
 import { ConfigModule } from "@nestjs/config";
 async function start() {
-  const configModule = ConfigModule.forRoot({
+  ConfigModule.forRoot({
     envFilePath: `.${process.env.NODE_ENV}.env`
   });
   const rabbitUrls = process.env.RABBIT_URLS;
@@ -21,6 +21,7 @@ async function start() {
   });
   await app.startAllMicroservices();
   await app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`));
+  console.log('url rabbit ' + rabbitUrls);
 }
 
 start();

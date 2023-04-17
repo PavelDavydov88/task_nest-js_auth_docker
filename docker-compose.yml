@@ -7,17 +7,27 @@ services:
     env_file:
       - .docker.env
     ports:
-      - 5002:5002
+      - 5022:5022
     command: npm run start:docker
     depends_on:
       - postgres
+#      - rabbitmq
   postgres:
     container_name: postgresUser
     image: postgres:14
     environment:
       POSTGRES_DB: "dbKinopoiskUser"
-      POSTGRES_USER: "pguser"
+      POSTGRES_USER: "pgUser"
       POSTGRES_PASSWORD: "123456"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+#      POSTGRES_HOST_AUTH_METHOD: "trust"
     ports:
-      - 5433:5432
+      - 5434:5432
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rmuser
+      RABBITMQ_DEFAULT_PASS: rmpassword
+    ports:
+      - 5672:5672
+      - 15672:15672

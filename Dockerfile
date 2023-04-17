@@ -10,6 +10,6 @@ COPY . .
 
 COPY ./dist ./dist
 
-EXPOSE 5002
+EXPOSE 5022
 
 CMD ["npm", "run", "start:docker"]
